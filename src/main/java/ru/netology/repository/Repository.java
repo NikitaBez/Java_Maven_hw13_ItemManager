@@ -29,11 +29,11 @@ public class Repository {
     }
 
     public void removeById(int id) {
-//        if (findById(id) == null) {
-//            throw new NotFoundException(
-//                    "Элемент с id: " + id + " не найден"
-//            );
-//        }
+        if (findById(id) == null) {
+            throw new NotFoundException(
+                    "Элемент с id: " + id + " не найден"
+            );
+        }
         Product[] tmp = new Product[products.length - 1];
         int copyToIndex = 0;
         for (Product product : products) {
