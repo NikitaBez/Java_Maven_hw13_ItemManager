@@ -2,13 +2,14 @@ package ru.netology.repository;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import ru.netology.repository.NotFoundException;
 import ru.netology.data.Book;
 import ru.netology.data.Product;
 import ru.netology.data.Smartphone;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class RepositoryTest {
+public class RepositoryTest {
     Book book1 = new Book(
             1,
             "Россия в квадрате",
@@ -55,4 +56,18 @@ class RepositoryTest {
 
         Assertions.assertArrayEquals(expected, actual);
     }
+
+    @Test
+    public void removeByIdExceedingExisting() {
+        Repository repository = new Repository();
+        repository.add(book1);
+        repository.add(book2);
+        repository.add(book3);
+
+        Assertions.assertThrows(NotFoundException.class,() -> {
+            repository.removeById(200);
+        });
+
+    }
+
 }
